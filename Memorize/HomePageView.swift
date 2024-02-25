@@ -28,6 +28,8 @@ struct HomePageView: View {
                 PastScansView()
                    WeatherStatusView(weatherDescription: "Sunny", temperature: 31, userGroup: "A")
                 Spacer()
+               
+             
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
@@ -36,6 +38,7 @@ struct HomePageView: View {
             viewModel.fetchUserData(userId: userId)
         }
         .background(Color(red: 0.9, green: 0.95, blue: 1.0).ignoresSafeArea())
+        
     }
 }
 

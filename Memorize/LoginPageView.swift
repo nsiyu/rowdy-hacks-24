@@ -10,86 +10,106 @@ struct LoginView: View {
             Color(red: 0.9, green: 0.95, blue: 1.0)
                 .ignoresSafeArea()
 
-            VStack(alignment: .leading, spacing: 20) {
-                Text("Login")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor(.darkBlue)
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    Text("Login")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor(.darkBlue)
 
-                if viewModel.showErrorBanner {
-                    Text("Invalid Credentials")
-                        .foregroundColor(.red)
-                        .font(.caption)
-                        .padding(5)
-                        .background(Color.white)
-                        .cornerRadius(5)
-                }
-
-                VStack(spacing: 5) {
-                    VStack(alignment: .leading, spacing: 5) {
-                        InputLabel(title: "Email")
-                        TextField("", text: $username)
-                            .padding()
+                    if viewModel.showErrorBanner {
+                        Text("Invalid Credentials")
+                            .foregroundColor(.red)
+                            .font(.caption)
+                            .padding(5)
                             .background(Color.white)
-                            .foregroundColor(.darkGray)
-                            .cornerRadius(8)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.gray, lineWidth: 1)
-                            )
-
-                        InputLabel(title: "Password")
-                        SecureField("", text: $password)
-                            .padding()
-                            .background(Color.white)
-                            .foregroundColor(.darkGray)
-                            .cornerRadius(8)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.gray, lineWidth: 1)
-                            )
+                            .cornerRadius(5)
                     }
-                }
 
-                if viewModel.showLoadingIndicator {
-                    ProgressView()
+                    VStack(spacing: 5) {
+                        VStack(alignment: .leading, spacing: 5) {
+                            InputLabel(title: "Email")
+                            TextField("", text: $username)
+                                .padding()
+                                .background(Color.white)
+                                .foregroundColor(.darkGray)
+                                .cornerRadius(8)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .stroke(Color.gray, lineWidth: 1)
+                                )
+
+                            InputLabel(title: "Password")
+                            SecureField("", text: $password)
+                                .padding()
+                                .background(Color.white)
+                                .foregroundColor(.darkGray)
+                                .cornerRadius(8)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .stroke(Color.gray, lineWidth: 1)
+                                )
+                        }
+                    }
+
+                    if viewModel.showLoadingIndicator {
+                        ProgressView()
+                            .padding()
+                    } else {
+                        Button("Login") {
+                            viewModel.login(email: username, password: password)
+                        }
                         .padding()
-                } else {
-                    Button("Login") {
-                        viewModel.login(email: username, password: password)
-                    }
-                    .padding()
-                    .frame(maxWidth: .infinity, maxHeight: 50)
-                    .background(Color.darkBlue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-                }
-
-                Spacer().frame(height: 20)
-
-                Text("Or login with")
-                    .font(.caption)
-                    .foregroundColor(.darkBlue)
-
-                VStack {
-                    SignUpSocialButton(logo: "googleLogo", title: "Google", color: .white)
                         .frame(maxWidth: .infinity, maxHeight: 50)
+                        .background(Color.darkBlue)
+                        .foregroundColor(.white)
                         .cornerRadius(10)
+                    }
 
                     Spacer().frame(height: 20)
 
-                    SignUpSocialButton(logo: "facebookLogo", title: "Facebook", color: .blue)
-                        .frame(maxWidth: .infinity, maxHeight: 50)
-                        .cornerRadius(10)
-                }
+                    HStack {
+                        Spacer()
+                        Text("Or login with")
+                            .font(.caption)
+                            .foregroundColor(.darkBlue)
+                        Spacer()
+                    }
 
-                Spacer()
+                    VStack {
+                        SignUpSocialButton(logo: "googleLogo", title: "Google", color: .white)
+                            .frame(maxWidth: .infinity, maxHeight: 50)
+                            .cornerRadius(10)
+
+                        Spacer().frame(height: 20)
+
+                        SignUpSocialButton(logo: "facebookLogo", title: "Facebook", color: .blue)
+                            .frame(maxWidth: .infinity, maxHeight: 50)
+                            .cornerRadius(10)
+                    }
+
+                    Spacer().frame(height: 20)
+
+                    HStack {
+                        Text("Don't have an account?")
+                            .font(.caption)
+                            .foregroundColor(.darkBlue)
+
+                        NavigationLink("Sign Up", destination: SignUpView())
+                            .font(.caption)
+                            .foregroundColor(.darkBlue)
+                    }
+
+                    Spacer()
+                }
+                .padding()
             }
-            .padding()
+            .padding(.bottom, 1) // This small padding ensures the ScrollView can scroll a bit to accommodate the keyboard.
             
             NavigationLink("", destination: MainView(userId: viewModel.userId), isActive: $viewModel.shouldNavigate)
         }
-        
+        .navigationBarHidden(true)
+
     }
 }
 

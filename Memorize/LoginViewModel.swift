@@ -26,6 +26,7 @@ class LoginViewModel: ObservableObject {
                 print("Error logging in: \(error)")
             }
         }
+        
     }
 }
 

@@ -6,92 +6,116 @@ struct SignUpView: View {
     @State private var username: String = ""
     @State private var email: String = ""
     @State private var password: String = ""
+    @State private var keyboardHeight: CGFloat = 0
     
     var body: some View {
         ZStack {
             Color(red: 0.9, green: 0.95, blue: 1.0)
                 .ignoresSafeArea()
 
-            VStack(alignment: .leading, spacing: 20) {
-                Text("Sign Up")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor(.darkBlue)
-
-                VStack(spacing: 5) {
-                    VStack(alignment: .leading, spacing: 5) {
-                        InputLabel(title: "Username")
-                        TextField("", text: $username)
-                            .padding()
-                            .background(Color.white)
-                            .foregroundColor(.darkGray)
-                            .cornerRadius(8)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.darkGray, lineWidth: 1)
-                            )
-
-                        InputLabel(title: "Email")
-                        TextField("", text: $email)
-                            .padding()
-                            .background(Color.white)
-                            .foregroundColor(.darkGray)
-                            .cornerRadius(8)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.darkGray, lineWidth: 1)
-                            )
-
-                        InputLabel(title: "Password")
-                        SecureField("", text: $password)
-                            .padding()
-                            .background(Color.white)
-                            .foregroundColor(.darkGray)
-                            .cornerRadius(8)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.darkGray, lineWidth: 1)
-                            )
-                    }
-                }
-
-                HStack {
-                    Spacer()
-                    Text("Or sign up with")
-                        .font(.caption)
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    Text("Sign Up")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
                         .foregroundColor(.darkBlue)
-                    Spacer()
-                }
-                Spacer().frame(height: 15)
 
-                VStack {
-                    SignUpSocialButton(logo: "googleLogo", title: "Google", color: .white)
-                        .frame(maxWidth: .infinity, maxHeight: 50)
-                        .cornerRadius(10)
+                    VStack(spacing: 5) {
+                        VStack(alignment: .leading, spacing: 5) {
+                            InputLabel(title: "Username")
+                            TextField("", text: $username)
+                                .padding()
+                                .background(Color.white)
+                                .foregroundColor(.darkGray)
+                                .cornerRadius(8)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .stroke(Color.darkGray, lineWidth: 1)
+                                )
+
+                            InputLabel(title: "Email")
+                            TextField("", text: $email)
+                                .padding()
+                                .background(Color.white)
+                                .foregroundColor(.darkGray)
+                                .cornerRadius(8)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .stroke(Color.darkGray, lineWidth: 1)
+                                )
+
+                            InputLabel(title: "Password")
+                            SecureField("", text: $password)
+                                .padding()
+                                .background(Color.white)
+                                .foregroundColor(.darkGray)
+                                .cornerRadius(8)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .stroke(Color.darkGray, lineWidth: 1)
+                                )
+                        }
+                    }
+
+                    HStack {
+                        Spacer()
+                        Text("Or sign up with")
+                            .font(.caption)
+                            .foregroundColor(.darkBlue)
+                        Spacer()
+                    }
+                    Spacer().frame(height: 15)
+
+                    VStack {
+                        SignUpSocialButton(logo: "googleLogo", title: "Google", color: .white)
+                            .frame(maxWidth: .infinity, maxHeight: 50)
+                            .cornerRadius(10)
+
+                        Spacer().frame(height: 20)
+
+                        SignUpSocialButton(logo: "facebookLogo", title: "Facebook", color: .blue)
+                            .frame(maxWidth: .infinity, maxHeight: 50)
+                            .cornerRadius(10)
+                    }
 
                     Spacer().frame(height: 20)
 
-                    SignUpSocialButton(logo: "facebookLogo", title: "Facebook", color: .blue)
-                        .frame(maxWidth: .infinity, maxHeight: 50)
-                        .cornerRadius(10)
-                }
+                    Button("Sign Up") {
+                        viewModel.signUp(email: email, password: password, username: username)
+                    }
+                    .padding()
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+                    .background(Color.darkBlue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
 
-                Spacer().frame(height: 20)
-
-                Button("Sign Up") {
-                    viewModel.signUp(email: email, password: password, username: username)
+                    Spacer()
+                    NavigationLink("", destination: DemographicsFormView(userId:  viewModel.userId), isActive: $viewModel.shouldNavigate)
                 }
                 .padding()
-                .frame(maxWidth: .infinity, maxHeight: 50)
-                .background(Color.darkBlue)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-
-                Spacer()
-                NavigationLink("", destination: DemographicsFormView(userId:  viewModel.userId), isActive: $viewModel.shouldNavigate)
+                .padding(.bottom, keyboardHeight)
+                .onAppear {
+                    registerForKeyboardNotifications()
+                }
             }
-            .padding()
         }
+    }
+
+    private func registerForKeyboardNotifications() {
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { notification in
+            guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+            keyboardHeight = keyboardFrame.height - (UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0)
+        }
+
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { _ in
+            keyboardHeight = 0
+        }
+    }
+}
+
+struct SignUpView_Previews: PreviewProvider {
+    static var previews: some View {
+        SignUpView()
     }
 }
 
@@ -137,8 +161,3 @@ extension Color {
     static let backGroundColor = Color(red: 0.9, green: 0.95, blue: 1.0)
 }
 
-struct SignUpView_Previews: PreviewProvider {
-    static var previews: some View {
-        SignUpView()
-    }
-}
