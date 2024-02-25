@@ -40,6 +40,7 @@ struct DoctorCardView: View {
                     Image(systemName: "star.fill")
                         .foregroundColor(.yellow)
                     Text("\(doctor.rating, specifier: "%.1f") (\(doctor.reviews) Reviews)")
+                        .foregroundColor(.black)
                         .font(.caption)
                 }.padding(.bottom) // Add padding at the bottom if needed
             }

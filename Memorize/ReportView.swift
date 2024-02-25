@@ -55,6 +55,8 @@ struct ReportView: View {
                                 self.showNextActions = true
                             }
                         }
+                    
+                    Text("Location, San Antonio").font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/).foregroundColor(.black)
                     DoctorsListView()
                 }
             }
