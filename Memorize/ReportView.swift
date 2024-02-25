@@ -42,7 +42,7 @@ struct ReportView: View {
                             Spacer()
                         }
                         .padding()
-                        Text("Melanoma is a severe skin cancer arising from pigment-producing cells, melanocytes. More aggressive than other skin cancers, it can spread quickly if untreated. Sun exposure and genetics increase risk. Prevention with sunscreen and protective clothing, along with regular skin checks, is crucial for early detection and treatment")
+                        Text(getDescription(disease:disease))
                             .padding(.horizontal)
                             .foregroundColor(Color.black)
                     }
@@ -153,6 +153,22 @@ struct ReportView: View {
                 return Color.gray // Fallback color
             }
         }
+    func getDescription(disease: String) -> String {
+    switch disease {
+    case "Melanoma":
+        return "Melanoma is a severe skin cancer arising from pigment-producing cells, melanocytes. More aggressive than other skin cancers, it can spread quickly if untreated. Sun exposure and genetics increase risk. Prevention with sunscreen and protective clothing, along with regular skin checks, is crucial for early detection and treatment" // Sun-related color
+    case "Nevus":
+        return "A nevus is a common skin lesion, often referred to as a mole, which can be either congenital or acquired. It is usually a benign growth that consists of a cluster of melanocytes, the cells responsible for skin pigmentation." // Health-related, trust and security
+    case "Basal cell carcinoma":
+        return "Basal cell carcinoma (BCC) is the most common type of skin cancer, originating from the basal cells in the epidermis, the skin's outermost layer. It is characterized by slow growth and seldom spreads to other parts of the body, but can cause significant local damage if not treated early." // Sunscreen, warmth and protection
+    case "Seborrheic keratosis":
+        return "Seborrheic keratosis is a common, benign skin growth that appears as a brown, black, or light tan spot on the face, chest, shoulders, or back. It has a waxy, scaly, slightly elevated appearance, often resembling a wart or a sticker stuck to the skin." // Nature, outdoors
+    default:
+        return "None" // Fallback color
+    }
+}
+    
+
         func getRiskLevel(disease: String) -> String {
         switch disease {
         case "Melanoma":
