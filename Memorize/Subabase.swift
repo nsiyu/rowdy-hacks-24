@@ -1,0 +1,4 @@
+import Supabase
+import Foundation
+
+let supabase = SupabaseClient(supabaseURL: URL(string: "https://ztxdbkyirchjwavlbpkb.supabase.co")!, supabaseKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp0eGRia3lpcmNoandhdmxicGtiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDg4MDA5NTQsImV4cCI6MjAyNDM3Njk1NH0.fkZs4M9gS8NcvsyQGkxWCUOA62olpmDGezTXsxw2qSg")
