@@ -7,6 +7,7 @@ struct CustomColors {
 }
 
 struct DoctorProfileView: View {
+    var doc : DoctorCard
     var body: some View {
         ZStack {
             CustomColors.backGroundColor.edgesIgnoringSafeArea(.all)
@@ -14,7 +15,7 @@ struct DoctorProfileView: View {
             VStack {
                 Spacer()
                 
-                Image("doctor1")
+                Image(doc.image)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 120, height: 120)
@@ -114,8 +115,4 @@ struct InformationView: View {
     }
 }
 
-struct DoctorProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        DoctorProfileView()
-    }
-}
+

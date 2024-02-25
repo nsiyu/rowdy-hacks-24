@@ -65,7 +65,7 @@ struct DoctorsListView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 16) {
                         ForEach(doctors) { doctor in
-                                            NavigationLink(destination: DoctorProfileView()) {
+                            NavigationLink(destination: DoctorProfileView(doc:doctor)) {
                                                 DoctorCardView(doctor: doctor)
                                             }
                                             .buttonStyle(PlainButtonStyle()) // Use this to prevent the button from altering the appearance of the card
