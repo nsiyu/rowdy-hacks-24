@@ -21,10 +21,6 @@ struct DoctorCardView: View {
                     .frame(width: 150, height: 150) // Set the frame size as before
                     .cornerRadius(12) // Apply corner radius to round the corners
                     .clipped()
-                //            Image("doctor1")
-                //                .fill(Color.gray.opacity(0.3))
-                //                .frame(width: 150, height: 150)
-                //                .cornerRadius(12)
                 
                 Text(doctor.name)
                     .fontWeight(.bold)
@@ -44,6 +40,7 @@ struct DoctorCardView: View {
                     Image(systemName: "star.fill")
                         .foregroundColor(.yellow)
                     Text("\(doctor.rating, specifier: "%.1f") (\(doctor.reviews) Reviews)")
+                        .foregroundColor(.black)
                         .font(.caption)
                 }.padding(.bottom) // Add padding at the bottom if needed
             }
@@ -64,25 +61,25 @@ struct DoctorsListView: View {
     ]
     
     var body: some View {
-        NavigationView {
             
             VStack{
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 16) {
                         ForEach(doctors) { doctor in
-                                                    NavigationLink(destination: DoctorProfileView()) {
-                                                        DoctorCardView(doctor: doctor)
-                                                    }
-                                                    .buttonStyle(PlainButtonStyle())
+                            NavigationLink(destination: DoctorProfileView(doc:doctor)) {
+                                                DoctorCardView(doctor: doctor)
+                                            }
+                                            .buttonStyle(PlainButtonStyle()) // Use this to prevent the button from altering the appearance of the card
+                                        }
                         }
                     }
                     .padding(.horizontal)
                 }
-            }
-            .navigationTitle("")
+         }
+            
+
         }
-    }
-}
+
 
 struct DoctorsListView_Previews: PreviewProvider {
     static var previews: some View {

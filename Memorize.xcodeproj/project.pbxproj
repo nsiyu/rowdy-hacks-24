@@ -24,7 +24,6 @@
 		2C1C43912B8AD4230072BA7B /* ChatBotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1C43902B8AD4230072BA7B /* ChatBotView.swift */; };
 		2C1C43932B8AE1680072BA7B /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1C43922B8AE1680072BA7B /* ReportView.swift */; };
 		2C1C43972B8AF3B00072BA7B /* CoreMlModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1C43962B8AF3B00072BA7B /* CoreMlModel.swift */; };
-		2C1C43A32B8B0D220072BA7B /* CoreMLModel.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 2C1C43A22B8B0D220072BA7B /* CoreMLModel.mlpackage */; };
 		2C1C43A52B8B24920072BA7B /* DoctorProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1C43A42B8B24920072BA7B /* DoctorProfilePage.swift */; };
 		2C1C43A72B8B263C0072BA7B /* DoctorListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1C43A62B8B263C0072BA7B /* DoctorListView.swift */; };
 		2C1C43A92B8B3E820072BA7B /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1C43A82B8B3E820072BA7B /* NewsView.swift */; };
@@ -49,6 +48,7 @@
 		2CD359792B8A7E17002CE4FC /* Realtime in Frameworks */ = {isa = PBXBuildFile; productRef = 2CD359782B8A7E17002CE4FC /* Realtime */; };
 		2CD3597B2B8A7E17002CE4FC /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 2CD3597A2B8A7E17002CE4FC /* Storage */; };
 		2CE5720C2B8B552900E538C1 /* TempInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE5720B2B8B552900E538C1 /* TempInstructionView.swift */; };
+		D5A0B5BC2B8B6DB800FDBE2F /* CoreMLModel.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = D5A0B5BB2B8B6DB800FDBE2F /* CoreMLModel.mlpackage */; };
 		EAFC136475ABC2F95D11EC92 /* Pods_Memorize.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A55DA95141B6486DEEC689 /* Pods_Memorize.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,7 +65,6 @@
 		2C1C43902B8AD4230072BA7B /* ChatBotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotView.swift; sourceTree = "<group>"; };
 		2C1C43922B8AE1680072BA7B /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		2C1C43962B8AF3B00072BA7B /* CoreMlModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMlModel.swift; sourceTree = "<group>"; };
-		2C1C43A22B8B0D220072BA7B /* CoreMLModel.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; name = CoreMLModel.mlpackage; path = "../model-training/CoreMLModel.mlpackage"; sourceTree = "<group>"; };
 		2C1C43A42B8B24920072BA7B /* DoctorProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorProfilePage.swift; sourceTree = "<group>"; };
 		2C1C43A62B8B263C0072BA7B /* DoctorListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorListView.swift; sourceTree = "<group>"; };
 		2C1C43A82B8B3E820072BA7B /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
@@ -84,6 +83,7 @@
 		81A55DA95141B6486DEEC689 /* Pods_Memorize.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Memorize.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3BC75E143DBB8A4A09CD02A /* Pods-Memorize.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Memorize.debug.xcconfig"; path = "Target Support Files/Pods-Memorize/Pods-Memorize.debug.xcconfig"; sourceTree = "<group>"; };
 		AC26A88E0FAB31D08188EC5D /* Pods-Memorize.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Memorize.release.xcconfig"; path = "Target Support Files/Pods-Memorize/Pods-Memorize.release.xcconfig"; sourceTree = "<group>"; };
+		D5A0B5BB2B8B6DB800FDBE2F /* CoreMLModel.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; name = CoreMLModel.mlpackage; path = ../../../../Downloads/CoreMLModel.mlpackage; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,7 +117,7 @@
 		2C3868462B874AE400C54634 = {
 			isa = PBXGroup;
 			children = (
-				2C1C43A22B8B0D220072BA7B /* CoreMLModel.mlpackage */,
+				D5A0B5BB2B8B6DB800FDBE2F /* CoreMLModel.mlpackage */,
 				2C3868512B874AE400C54634 /* Memorize */,
 				2C3868502B874AE400C54634 /* Products */,
 				B5494D8A715DB04533052B2B /* Pods */,
@@ -329,13 +329,13 @@
 				2C1C43972B8AF3B00072BA7B /* CoreMlModel.swift in Sources */,
 				2C1C43A92B8B3E820072BA7B /* NewsView.swift in Sources */,
 				2C1C43AB2B8B3E910072BA7B /* NewsModal.swift in Sources */,
+				D5A0B5BC2B8B6DB800FDBE2F /* CoreMLModel.mlpackage in Sources */,
 				2C3868632B87EB3B00C54634 /* SignUpView.swift in Sources */,
 				2C1C438B2B8A8F220072BA7B /* SignUpViewModel.swift in Sources */,
 				2C1091A22B8873C700AF326C /* MainView.swift in Sources */,
 				2CBAFCB42B88924C00396A14 /* CameraContainerView.swift in Sources */,
 				2C1C43892B8A8B2B0072BA7B /* Subabase.swift in Sources */,
 				2C3868552B874AE400C54634 /* ContentView.swift in Sources */,
-				2C1C43A32B8B0D220072BA7B /* CoreMLModel.mlpackage in Sources */,
 				2C1C438D2B8A90EB0072BA7B /* LoginViewModel.swift in Sources */,
 				2C1C43932B8AE1680072BA7B /* ReportView.swift in Sources */,
 				2C3868652B8805FF00C54634 /* StartPageView.swift in Sources */,
@@ -486,10 +486,20 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Memorize/Preview Content\"";
-				DEVELOPMENT_TEAM = 8TT5L6X334;
+				DEVELOPMENT_TEAM = WQP3C86AZM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Memorize/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<string>My App uses camera for vision</string>
+</plist>";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<string>My App uses camera for vision</string>
+</plist>";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -500,7 +510,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.nsh200001.Memorize;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.willy.Memorize;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -517,10 +527,20 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Memorize/Preview Content\"";
-				DEVELOPMENT_TEAM = 8TT5L6X334;
+				DEVELOPMENT_TEAM = WQP3C86AZM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Memorize/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<string>My App uses camera for vision</string>
+</plist>";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<string>My App uses camera for vision</string>
+</plist>";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -531,7 +551,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.nsh200001.Memorize;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.willy.Memorize;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

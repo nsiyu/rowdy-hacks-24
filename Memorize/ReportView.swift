@@ -5,7 +5,7 @@ import SwiftUI
 struct ReportView: View {
     @Environment(\.presentationMode) var presentationMode
     
-    let disease = "nevus"
+    let disease = "Melanoma"
     let prediction = 0.93
     let nextActions = [
             ("Avoid excessive sun exposure", "sun.max.fill"),
@@ -55,6 +55,8 @@ struct ReportView: View {
                                 self.showNextActions = true
                             }
                         }
+                    
+                    Text("Location, San Antonio").font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/).foregroundColor(.black)
                     DoctorsListView()
                 }
             }
@@ -153,13 +155,13 @@ struct ReportView: View {
         }
         func getRiskLevel(disease: String) -> String {
         switch disease {
-        case "melanoma":
+        case "Melanoma":
             return "High" // Sun-related color
-        case "nevus":
+        case "Nevus":
             return "Low" // Health-related, trust and security
-        case "basal cell carcinoma":
+        case "Basal cell carcinoma":
             return "Medium" // Sunscreen, warmth and protection
-        case "seborrheic keratosis":
+        case "Seborrheic keratosis":
             return "High" // Nature, outdoors
         default:
             return "None" // Fallback color
