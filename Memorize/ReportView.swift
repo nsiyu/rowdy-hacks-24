@@ -1,243 +1,278 @@
 import SwiftUI
 
+
+
 struct ReportView: View {
     @Environment(\.presentationMode) var presentationMode
-    let placeholderFindings = [
-        ("News 1", "https://www.example.com/news1"),
-        ("News 2", "https://www.example.com/news2"),
-        ("News 3", "https://www.example.com/news3")
-    ]
-    @State private var selectedPageIndex = 0
     
-    let disease = "Melanoma"
-    let riskLevel = "High"
-    let findings = [
-        ("Early detection is crucial", "https://www.example.com/early-detection"),
-        ("Regular skin check-ups are recommended", "https://www.example.com/skin-check-ups")
-    ]
+    let disease = "nevus"
+    let prediction = 0.93
     let nextActions = [
-            "Avoid excessive sun exposure",
-            "Schedule regular skin check-ups",
-            "Use sunscreen daily",
-            "Wear protective clothing outdoors"
+            ("Avoid excessive sun exposure", "sun.max.fill"),
+            ("Schedule regular skin check-ups", "calendar.badge.plus"),
+            ("Use sunscreen daily", "umbrella.fill"),
+            ("Wear protective clothing outdoors", "figure.walk.circle.fill")
         ]
     
+    @State private var animateGauges = false
+    @State private var showNextActions = false
+
     var body: some View {
-        ScrollView {
-            
-            VStack(alignment: .leading, spacing: 20) {
-                
-                HStack {
-                    Button(action: {
-                        presentationMode.wrappedValue.dismiss()
-                    }) {
-                        Image(systemName: "chevron.left")
-                            .font(.title2)
-                            .foregroundColor(.darkBlue)
-                    }
-                    Text("Report")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .foregroundColor(Color.darkBlue)
+        NavigationView {
+            ScrollView {
+                VStack {
+                    headerView
 
-                }
-                
-                Text("Disease Detected: \(disease)")
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.secondary)
-                    .foregroundColor(Color.darkBlue.opacity(0.7))
-
-                
-                HStack(spacing:20){
-                    CardView(title: "Risk Level:", content: riskLevel, includeRiskGauge: true)
+                    diseaseDetectedView
                     
-                    HStack(spacing:20){
-                        CardView(title: "Certainty:", content: riskLevel, includeCertaintyGauge: true, certaintyPercentage: 0.5)
-                    }
-                }
-                
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Recent Findings")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                    
-                    ForEach(placeholderFindings, id: \.0) { finding in
-                        VStack(alignment: .leading) {
-                            Text(finding.0)
-                                .font(.body)
-                                .foregroundColor(.primary)
-                                .padding(.bottom, 2)
-                            
-                            Divider()
+                    riskCertaintyView
+                        .padding()
+                        .animation(Animation.easeInOut(duration: 1.5).delay(0.5), value: animateGauges)
+                        .onAppear {
+                            self.animateGauges = true
                         }
+                    
+                    
+                    VStack(alignment: .leading) {
+                        HStack {
+                                Text("\(disease)")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundColor(Color.black)
+                            Spacer()
+                        }
+                        .padding()
+                        Text("Melanoma is a severe skin cancer arising from pigment-producing cells, melanocytes. More aggressive than other skin cancers, it can spread quickly if untreated. Sun exposure and genetics increase risk. Prevention with sunscreen and protective clothing, along with regular skin checks, is crucial for early detection and treatment")
+                            .padding(.horizontal)
+                            .foregroundColor(Color.black)
                     }
-                }
                     
-                    
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Next Actions")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                    
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 20) {
-                            ForEach(Array(nextActions.enumerated()), id: \.element) { index, action in
-                                CardView(content: "• \(action)")
-                                   
-                                    .padding(.leading, index == 0 ? 20 : 0)
-                                    .padding(.trailing, index == nextActions.count - 1 ? 20 : 0)
+                    nextActionsView
+                        .padding()
+                        .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .opacity))
+                        .onAppear {
+                            withAnimation(.spring()) {
+                                self.showNextActions = true
                             }
                         }
-                    }
-                    .padding(.horizontal, -20)
-                    .frame(height: 175)
-                    // Specialists Near You Section
-                    Text("Specialists Near You")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .padding(.top)
-                                
-                        DoctorsListView()
-                    }
+                    DoctorsListView()
                 }
-                .padding()
             }
-        .background(Color(red: 0.9, green: 0.95, blue: 1.0).ignoresSafeArea())
-
+            .background(Color.backGroundColor)
             .navigationBarHidden(true)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
     
-    struct GaugeShape: Shape {
-        var value: Double
-        var isHalfCircle: Bool
-        func path(in rect: CGRect) -> Path {
-            let center = CGPoint(x: rect.midX, y: rect.midY)
-            let radius = min(rect.width, rect.height) / 2
-            let startAngle = Angle(degrees: 0)
-            
-            var endAngle: Angle
-            if isHalfCircle {
-                endAngle = Angle(degrees: 180 * value)
-            } else {
-                endAngle = Angle(degrees: 360 * value)
+    private var headerView: some View {
+        HStack {
+            Button(action: {
+                presentationMode.wrappedValue.dismiss()
+            }) {
+                Image(systemName: "chevron.left")
+                    .font(.title2)
+                    .foregroundColor(Color.darkBlue)
             }
+            Spacer()
+            Text("Report")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .foregroundColor(Color.darkBlue)
+            Spacer()
+        }
+        .padding()
+        .background(Color.backGroundColor)
+    }
+    
+    private var diseaseDetectedView: some View {
+        Text("Disease Detected: \(disease)")
+            .font(.title2)
+            .fontWeight(.semibold)
+            .foregroundColor(Color.black)
+            .padding()
+            .background(RoundedRectangle(cornerRadius: 10)
+                            .fill(Color.white)
+                            .shadow(color: Color.darkGray, radius: 3, x: 0, y: 3))
+            .padding()
+    }
+    
+    private var riskCertaintyView: some View {
+        HStack(spacing: 20) {
+            RiskLevelView(riskLevel: getRiskLevel(disease: disease), animate: $animateGauges)
             
-            var path = Path()
-            
-            path.addArc(center: center, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: false)
-            
-            return path
+            CertaintyGauge(certaintyPercentage: Double(prediction), animate: $animateGauges)
         }
     }
     
-    struct CertaintyGauge: View {
-        let certaintyPercentage: Double
-        
-        var body: some View {
-            ZStack {
-                GaugeShape(value: 1.0, isHalfCircle: true)
-                    .stroke(Color.gray, style: StrokeStyle(lineWidth: 20, lineCap: .round))
-                    .rotationEffect(.degrees(180))
+
+    
+    var nextActionsView: some View {
+            VStack(alignment: .leading) {
+                Text("Next Actions")
+                    .font(.headline)
+                    .foregroundColor(Color.black) // Ensure you have this color defined in your asset catalog
+                    .padding(.leading)
                 
-                GaugeShape(value: certaintyPercentage, isHalfCircle: true)
-                    .stroke(Color.blue, style: StrokeStyle(lineWidth: 20, lineCap: .round))
-                    .rotationEffect(.degrees(180))
-                Text("\(Int(certaintyPercentage * 100))%")
-                    .font(.body)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .position(x: 50, y: 50)
-                    .zIndex(1)
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 15) {
+                        ForEach(nextActions, id: \.0) { action, icon in
+                            HStack {
+                                Image(systemName: icon)
+                                    .font(.system(size: 32)) // Larger icon size
+                                    .foregroundColor(getColorForAction(action: action))
+                                    .padding(.trailing, 5)
+                                Text(action)
+                            }
+                            .padding()
+                            .frame(width: 200, height: 100)
+                            .background(Color.white)
+                            .cornerRadius(10)
+                            .shadow(radius: 2)
+                            .foregroundColor(Color.gray)
+                        }
+                    }
+                    .padding(.leading)
+                }
             }
-            .aspectRatio(1, contentMode: .fit)
-            .frame(width: 100, height: 100)
-            .padding()
-            .background(Color.white)
-            .cornerRadius(10)
         }
-    }
-    
-    
-    
-    
-    
-    struct RiskGauge: View {
-        let riskLevel: String
         
-        var body: some View {
-            let gaugeColor: Color
-            
-            switch riskLevel {
-            case "Low":
-                gaugeColor = Color.green
-            case "Medium":
-                gaugeColor = Color.yellow
-            case "High":
-                gaugeColor = Color.red
+        // Function to return a color based on the action
+        func getColorForAction(action: String) -> Color {
+            switch action {
+            case "Avoid excessive sun exposure":
+                return Color.yellow // Sun-related color
+            case "Schedule regular skin check-ups":
+                return Color.blue // Health-related, trust and security
+            case "Use sunscreen daily":
+                return Color.orange // Sunscreen, warmth and protection
+            case "Wear protective clothing outdoors":
+                return Color.green // Nature, outdoors
             default:
-                gaugeColor = Color.gray
+                return Color.gray // Fallback color
             }
-            
-            return VStack {
-                ZStack {
-                    GaugeShape(value: 1.0, isHalfCircle: false)
-                        .stroke(gaugeColor, style: StrokeStyle(lineWidth: 20, lineCap: .round))
-                    Text(riskLevel)
-                        .font(.body)
-                        .fontWeight(.bold)
-                        .foregroundColor(.primary)
-                }
-                .aspectRatio(1, contentMode: .fit)
-                .frame(width: 100, height: 100)
-            }
-            .padding()
-            .background(Color.white)
-            .cornerRadius(10)
+        }
+        func getRiskLevel(disease: String) -> String {
+        switch disease {
+        case "melanoma":
+            return "High" // Sun-related color
+        case "nevus":
+            return "Low" // Health-related, trust and security
+        case "basal cell carcinoma":
+            return "Medium" // Sunscreen, warmth and protection
+        case "seborrheic keratosis":
+            return "High" // Nature, outdoors
+        default:
+            return "None" // Fallback color
         }
     }
     
-    struct CardView: View {
-        var title: String?
-        var content: String
-        var color: Color = Color(UIColor.systemBackground)
-        var includeRiskGauge: Bool = false
-        var includeCertaintyGauge: Bool = false
-        var certaintyPercentage: Double = 0
-        
-        var body: some View {
-            VStack(alignment: .leading, spacing: 5) {
-                if let title = title {
-                    Text(title)
-                        .font(.headline)
-                        .foregroundColor(.secondary)
-                }
-                if includeRiskGauge {
-                    RiskGauge(riskLevel: content)
-                } else if includeCertaintyGauge {
-                    CertaintyGauge(certaintyPercentage: certaintyPercentage)
-                } else {
-                    Text(content)
-                        .font(.body)
-                        .foregroundColor(.primary)
-                }
+    }
+
+struct ReportView_Previews: PreviewProvider {
+    static var previews: some View {
+        ReportView()
+    }
+}
+
+
+struct RiskLevelView: View {
+    var riskLevel: String
+    @Binding var animate: Bool
+
+    var body: some View {
+        VStack {
+            Text("Risk Level:")
+                .font(.headline)
+                .foregroundColor(Color.black)
+            ZStack {
+                Circle()
+                    .stroke(lineWidth: 10.0)
+                    .opacity(0.3)
+                    .foregroundColor(riskLevelColor)
+
+                Circle()
+                    .trim(from: 0.0, to: animate ? riskLevelTrim : 0.0)
+                    .stroke(style: StrokeStyle(lineWidth: 10.0, lineCap: .round, lineJoin: .round))
+                    .foregroundColor(riskLevelColor)
+                    .rotationEffect(Angle(degrees: 270.0))
+                
+                Text(riskLevel)
+                    .font(.title)
+                    .bold()
+                    .foregroundColor(Color.black)
             }
-            .padding()
-            .frame(width: 170, height: 170)
-            .background(color)
-            .cornerRadius(10)
-            
-            .shadow(radius: 2)
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.darkBlue.opacity(0.5), lineWidth: 1)
-            )
+            .frame(width: 100, height: 100)
+        }
+        .frame(width: 130, height: 130)
+        .padding()
+        .background(Color.white)
+        .cornerRadius(15)
+        .shadow(radius: 5)
+        .animation(.linear(duration: 2.0), value: animate)
+    }
+
+    private var riskLevelColor: Color {
+        switch riskLevel {
+        case "Low":
+            return .green
+        case "Medium":
+            return .yellow
+        case "High":
+            return .red
+        default:
+            return .gray
         }
     }
-    
-    struct ReportView_Previews: PreviewProvider {
-        static var previews: some View {
-            ReportView()
+
+    private var riskLevelTrim: CGFloat {
+        switch riskLevel {
+        case "Low":
+            return 1.0 / 3.0
+        case "Medium":
+            return 2.0 / 3.0
+        case "High":
+            return 1.0
+        default:
+            return 0.0
         }
     }
+}
+
+struct CertaintyGauge: View {
+    var certaintyPercentage: Double
+    @Binding var animate: Bool
+
+    var body: some View {
+        VStack {
+            Text("Certainty:")
+                .font(.headline)
+                .foregroundColor(Color.black)
+            ZStack {
+                Circle()
+                    .stroke(lineWidth: 10.0)
+                    .opacity(0.3)
+                    .foregroundColor(Color.blue)
+
+                Circle()
+                    .trim(from: 0.0, to: animate ? certaintyPercentage : 0.0)
+                    .stroke(style: StrokeStyle(lineWidth: 10.0, lineCap: .round, lineJoin: .round))
+                    .foregroundColor(Color.blue)
+                    .rotationEffect(Angle(degrees: 270.0))
+                
+                Text("\(Int(certaintyPercentage * 100))%")
+                    .font(.title)
+                    .foregroundColor(Color.black)
+                    .bold()
+            }
+            .frame(width: 100, height: 100)
+        }
+        .frame(width:130, height: 130)
+        .padding()
+        .background(Color.white)
+        .cornerRadius(15)
+        .shadow(radius: 5)
+        .animation(.linear(duration: 2.0), value: animate)
+    }
+}
+
+

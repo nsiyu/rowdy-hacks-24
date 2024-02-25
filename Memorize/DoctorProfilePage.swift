@@ -12,14 +12,9 @@ struct DoctorProfileView: View {
             CustomColors.backGroundColor.edgesIgnoringSafeArea(.all)
             
             VStack {
-                HStack {
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(CustomColors.darkBlue)
-                        .padding()
-                    Spacer()
-                }
+                Spacer()
                 
-                Image("doctor_photo")
+                Image("doctor1")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 120, height: 120)
@@ -36,7 +31,7 @@ struct DoctorProfileView: View {
                     Image(systemName: "heart.text.square")
                         .foregroundColor(Color.white)
                     
-                    Text("Cardiologist")
+                    Text("Dermatologist")
                         
                 }.fontWeight(.semibold)
                 .foregroundColor(.white)
@@ -72,12 +67,14 @@ struct DoctorProfileView: View {
                         .foregroundColor(CustomColors.darkBlue)
                     Text("90 Reviews")
                         .foregroundColor(CustomColors.darkGray)
+                    // Add a list or ScrollView of reviews here
                 }
                 .padding()
                 
                 Spacer()
                 
                 Button(action: {
+                    // Handle booking appointment
                 }) {
                     Text("Book Appointment")
                         .foregroundColor(.white)
