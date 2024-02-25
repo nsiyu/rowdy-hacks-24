@@ -104,13 +104,14 @@ struct LoginView: View {
                 }
                 .padding()
             }
-            .padding(.bottom, 1) // This small padding ensures the ScrollView can scroll a bit to accommodate the keyboard.
+            .padding(.bottom, 1)
             
             NavigationLink("", destination: MainView(userId: viewModel.userId), isActive: $viewModel.shouldNavigate)
         }
         .navigationBarHidden(true)
 
     }
+    
 }
 
 struct LoginView_Previews: PreviewProvider {

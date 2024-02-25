@@ -42,8 +42,6 @@ struct HomePageView: View {
     }
 }
 
-
-
 struct SkinStatusView: View {
     var body: some View {
         VStack(alignment: .leading) {
@@ -108,34 +106,6 @@ struct ProfileAndNotifyView: View{
             
         }.padding(.trailing, 20)}
 }
-
-//struct SkinNewsCard: View {
-//    var body: some View {
-//        VStack(spacing: 10) {
-//            Image("skinNews")
-//                .resizable()
-//                .scaledToFill()
-//                .frame(maxWidth: .infinity, maxHeight: 120)
-//                .clipped()
-//
-//            VStack(alignment: .leading) {
-//                Text("The Latest in Skin Care")
-//                    .font(.subheadline)
-//                    .foregroundColor(Color.darkBlue)
-//
-//                Text("Discover new tips and tricks to keep your skin healthy and glowing.")
-//                    .font(.caption)
-//                    .foregroundColor(Color.darkGray)
-//                    .lineLimit(3)
-//            }
-//            .padding()
-//        }
-//        .frame(maxWidth: .infinity)
-//        .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
-//        .shadow(radius: 5)
-//        .padding(.horizontal)
-//    }
-//}
 
 struct PastScansView: View {
     var body: some View {

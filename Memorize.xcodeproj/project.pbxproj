@@ -48,6 +48,7 @@
 		2CD359772B8A7E17002CE4FC /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = 2CD359762B8A7E17002CE4FC /* PostgREST */; };
 		2CD359792B8A7E17002CE4FC /* Realtime in Frameworks */ = {isa = PBXBuildFile; productRef = 2CD359782B8A7E17002CE4FC /* Realtime */; };
 		2CD3597B2B8A7E17002CE4FC /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 2CD3597A2B8A7E17002CE4FC /* Storage */; };
+		2CE5720C2B8B552900E538C1 /* TempInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE5720B2B8B552900E538C1 /* TempInstructionView.swift */; };
 		EAFC136475ABC2F95D11EC92 /* Pods_Memorize.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A55DA95141B6486DEEC689 /* Pods_Memorize.framework */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +80,7 @@
 		2C3868642B8805FF00C54634 /* StartPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPageView.swift; sourceTree = "<group>"; };
 		2CBAFCB32B88924C00396A14 /* CameraContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraContainerView.swift; sourceTree = "<group>"; };
 		2CD3596F2B88C023002CE4FC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		2CE5720B2B8B552900E538C1 /* TempInstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempInstructionView.swift; sourceTree = "<group>"; };
 		81A55DA95141B6486DEEC689 /* Pods_Memorize.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Memorize.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3BC75E143DBB8A4A09CD02A /* Pods-Memorize.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Memorize.debug.xcconfig"; path = "Target Support Files/Pods-Memorize/Pods-Memorize.debug.xcconfig"; sourceTree = "<group>"; };
 		AC26A88E0FAB31D08188EC5D /* Pods-Memorize.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Memorize.release.xcconfig"; path = "Target Support Files/Pods-Memorize/Pods-Memorize.release.xcconfig"; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				2C1C43A62B8B263C0072BA7B /* DoctorListView.swift */,
 				2C1C43A82B8B3E820072BA7B /* NewsView.swift */,
 				2C1C43AA2B8B3E910072BA7B /* NewsModal.swift */,
+				2CE5720B2B8B552900E538C1 /* TempInstructionView.swift */,
 			);
 			path = Memorize;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				2C3868652B8805FF00C54634 /* StartPageView.swift in Sources */,
 				2C3868532B874AE400C54634 /* MemorizeApp.swift in Sources */,
 				2C10919E2B881CFA00AF326C /* DemographicsFormView.swift in Sources */,
+				2CE5720C2B8B552900E538C1 /* TempInstructionView.swift in Sources */,
 				2C1091A02B886F9900AF326C /* HomePageView.swift in Sources */,
 				2C1248882B88AA6700A800D9 /* PhotoPreviewView.swift in Sources */,
 				2C1C43A72B8B263C0072BA7B /* DoctorListView.swift in Sources */,

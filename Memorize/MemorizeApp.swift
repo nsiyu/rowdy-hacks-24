@@ -9,7 +9,7 @@ struct MemorizeApp: App {
     var body: some Scene {
         WindowGroup {
               NavigationView {
-                  StartPageView()
+                  DemographicsFormView(userId: "4da5f51e-461e-4076-a919-d31a937597c2")
               }
           }
     }

@@ -3,7 +3,7 @@ import SwiftUI
 struct DemographicsFormView: View {
     @State private var age: String = ""
     @State private var race: String = ""
-    @State private var gender: String = "Male"
+    @State private var gender: String = ""
     let genderOptions = ["Male", "Female", "Other"]
     let userId: String
 
@@ -26,7 +26,7 @@ struct DemographicsFormView: View {
                     InputField(title: "Gender", placeholder: "Enter your gender", text: $gender)
 
 
-                    NavigationLink(destination: MainView(userId: userId)) {
+                    NavigationLink(destination: TempMainCameraView()) {
                         
                         Text("Submit")
                     }
@@ -93,3 +93,9 @@ struct PickerField: View {
     }
 }
 
+
+struct DemographicsFormView_Previews: PreviewProvider {
+    static var previews: some View {
+        DemographicsFormView(userId: "4da5f51e-461e-4076-a919-d31a937597c2")
+    }
+}
