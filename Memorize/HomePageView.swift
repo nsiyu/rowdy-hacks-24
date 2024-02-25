@@ -189,7 +189,7 @@ struct WeatherStatusView: View {
             .padding()
             .frame(maxWidth: .infinity)
             .background(RoundedRectangle(cornerRadius: 10).fill(Color(red: 1, green: 0.8, blue: 0.8)))
-            .shadow(radius: 5)
+            .shadow(radius: 10)
             .background()
         }
         .padding(.horizontal)
